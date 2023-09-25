@@ -1,28 +1,35 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { userApi } from './services/userApi';
-import { persistReducer } from 'redux-persist';
+import thunk from 'redux-thunk';
+// import { userApi } from './services/userApi';
+import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import cart from './slices/cartSlice';
+import sideMenu from './slices/sideMenuSlice';
 import storage from './customStorage';
-import { authReducer } from './slices/authSlice';
-import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
-const authPersistConfig = {
-  key: 'auth',
+const reducers = combineReducers({
+  cart,
+  sideMenu,
+  // [userApi.reducerPath]: userApi.reducer,
+});
+
+const persistConfig = {
+  key: 'root',
+  version: 1,
   storage: storage,
-  whitelist: ['isAuth', 'jid'],
 };
 
-const rootReducer = combineReducers({
-  // auth: persistReducer(authPersistConfig, authReducer),
-  [userApi.reducerPath]: userApi.reducer,
-});
+const persistedReducer = persistReducer(persistConfig, reducers);
 
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
   devTools: process.env.NODE_ENV !== 'production',
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({}).concat([userApi.middleware]),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat([thunk]),
 });
-
-// setupListeners(store.dispatch);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

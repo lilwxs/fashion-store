@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "(wsl-open http://localhost:3003) && next dev -p 3003",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
@@ -16,18 +17,30 @@
     "@mui/lab": "^5.0.0-alpha.145",
     "@mui/material": "^5.14.10",
     "@reduxjs/toolkit": "^1.9.5",
+    "bcryptjs": "^2.4.3",
+    "mongodb": "^6.1.0",
+    "mongoose": "^7.5.2",
     "next": "13.5.2",
+    "next-auth": "^4.23.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^4.11.0",
     "react-redux": "^8.1.2",
-    "redux-persist": "^6.0.0"
+    "react-scroll-to-top": "^3.0.0",
+    "react-slideshow-image": "^4.2.1",
+    "redux-persist": "^6.0.0",
+    "sass": "^1.68.0",
+    "swr": "^2.2.2"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.4",
     "@types/node": "^20.6.3",
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",
     "eslint": "^8.49.0",
     "eslint-config-next": "^13.5.2",
+    "prettier": "^3.0.3",
     "typescript": "^5.2.2"
   }
 }

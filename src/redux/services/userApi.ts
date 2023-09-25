@@ -7,7 +7,7 @@ type User = {
 };
 
 export const userApi = createApi({
-  reducerPath: 'userApi',
+  reducerPath: 'productsApi',
   refetchOnFocus: true,
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://jsonplaceholder.typicode.com/',
