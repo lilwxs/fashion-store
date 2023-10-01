@@ -1,10 +1,10 @@
-import db from '@/lib/mongodb';
+import db from '@/database/db';
 import { NextResponse } from 'next/server';
 
 export const GET = async (req: Request) => {
   try {
-    await db.connectDb();
-    await db.disconnectDb();
+    await db.connect();
+    await db.disconnect();
 
     return NextResponse.json({ name: 'John Doe' }, { status: 200 });
   } catch (error) {
