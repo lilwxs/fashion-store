@@ -22,4 +22,4 @@ export const sideMenuSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { toggleSideMenu } = sideMenuSlice.actions;
 
-export default sideMenuSlice.reducer;
+export const sideMenuReducer =  sideMenuSlice.reducer;

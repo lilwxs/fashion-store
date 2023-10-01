@@ -1,5 +1,5 @@
 'use client';
-import type { Metadata, NextPage } from 'next';
+import type { NextPage } from 'next';
 import { Typography } from '@mui/material';
 import { ShopLayout } from '@/components/layouts/ShopLayout';
 import { FullScreenLoading } from '@/components/ui/FullScreenLoading';

@@ -7,6 +7,8 @@ import { ItemCounter } from '../ui/ItemCounter';
 import ProductSlideshow from '../products/ProductSlideshow';
 import { IProduct, ISize } from '@/interfaces/products';
 import { useRouter } from 'next/navigation';
+import { useAppDispatch } from '@/redux/hooks';
+import { addProductToCart } from '@/redux/slices/cartSlice';
 
 interface Props {
   product: IProduct;
@@ -14,6 +16,7 @@ interface Props {
 
 const Product: FC<Props> = ({ product }) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const [showMessage, setShowMessage] = useState(false);
 
   const [tempCartProduct, setTempCartProduct] = useState<ICartProduct>({
@@ -28,6 +31,8 @@ const Product: FC<Props> = ({ product }) => {
   });
 
   const selectedSize = (size: ISize) => {
+    setShowMessage(false);
+
     setTempCartProduct((currentProduct) => ({
       ...currentProduct,
       size,
@@ -47,7 +52,7 @@ const Product: FC<Props> = ({ product }) => {
       return;
     }
 
-    //   addProductToCart(tempCartProduct);
+    dispatch(addProductToCart(tempCartProduct));
     router.push('/cart');
   };
 

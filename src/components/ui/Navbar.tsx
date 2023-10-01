@@ -18,7 +18,7 @@ import {
 import { ClearOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material';
 
 // import { CartContext, UiContext } from '../../context';
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { toggleSideMenu } from '@/redux/slices/sideMenuSlice';
 import { ThemeToggle } from './ThemeToggle';
 import Link from 'next/link';
@@ -26,9 +26,9 @@ import Link from 'next/link';
 export const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
-  // const { toggleSideMenu } = useContext( UiContext );
   const dispatch = useAppDispatch();
-  // const { numberOfItems } = useContext( CartContext );
+
+  const { numberOfItems } = useAppSelector((state) => state.cart);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearchVisible, setIsSearchVisible] = useState(false);
@@ -106,9 +106,9 @@ export const Navbar = () => {
 
         <MuiLink component={Link} href='/cart'>
           <IconButton>
-            {/* <Badge badgeContent={ numberOfItems > 9 ? '+9': numberOfItems  } color="secondary"> */}
-            <ShoppingCartOutlined />
-            {/* </Badge> */}
+            <Badge badgeContent={numberOfItems > 9 ? '+9' : numberOfItems} color='secondary'>
+              <ShoppingCartOutlined />
+            </Badge>
           </IconButton>
         </MuiLink>
         <ThemeToggle />

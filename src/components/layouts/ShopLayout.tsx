@@ -1,3 +1,4 @@
+'use client';
 import { Navbar } from '@/components/ui/Navbar';
 import { SideMenu } from '@/components/ui/SideMenu';
 import { Metadata } from 'next';
@@ -8,11 +9,19 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 interface Props {
   children: React.ReactNode;
+  params?: any;
 }
 
-export const metadata: Metadata = {
-  title: 'Next App | Shop',
-  description: 'Find the best Tesla products here',
+// export const metadata: Metadata = {
+//   title: 'Next App | Shop',
+//   description: 'Find the best Tesla products here',
+// };
+
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+  console.log('params', params);
+  return {
+    title: 'post.title',
+  };
 };
 
 export const ShopLayout: FC<Props> = ({ children }) => {

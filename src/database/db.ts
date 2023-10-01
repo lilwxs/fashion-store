@@ -12,7 +12,7 @@ const mongoConnection = {
 
 export const connect = async () => {
   if (mongoConnection.isConnected) {
-    console.log('👎 We were already connected');
+    console.log('We were already connected');
     return;
   }
 
@@ -20,7 +20,7 @@ export const connect = async () => {
     mongoConnection.isConnected = mongoose.connections[0].readyState;
 
     if (mongoConnection.isConnected === 1) {
-      console.log('👎 Using previous connection');
+      console.log('Using previous connection');
       return;
     }
 
