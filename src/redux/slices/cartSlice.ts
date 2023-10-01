@@ -123,6 +123,9 @@ export const cartSlice = createSlice({
     updateAddress: (state, action: PayloadAction<ShippingAddress>) => {
       // state.cartItems = [];
     },
+    createOrder: (state, action: PayloadAction<ShippingAddress>) => {
+      state = initialState;
+    },
     orderComplete: (state, action: PayloadAction<ShippingAddress>) => {
       state = initialState;
     },
@@ -132,6 +135,24 @@ export const cartSlice = createSlice({
 // Actions
 
 export const createOrder = createAsyncThunk('cart/createOrder', async (body: IOrder, thunkAPI) => {
+  const { getState } = thunkAPI; // <-- invoke and access state object
+  const state = getState() as RootState;
+  if (!state?.cart?.shippingAddress) {
+    throw new Error('There is no delivery address');
+  }
+
+  // const body: IOrder = {
+  //     orderItems: state.cart.map( p => ({
+  //         ...p,
+  //         size: p.size!
+  //     })),
+  //     shippingAddress: state.shippingAddress,
+  //     numberOfItems: state.numberOfItems,
+  //     subTotal: state.subTotal,
+  //     tax: state.tax,
+  //     total: state.total,
+  //     isPaid: false
+  // }
   // const { getState } = thunkAPI; // <-- invoke and access state object
   // const state = getState() as RootState;
   // try {

@@ -6,6 +6,7 @@ import ToasterContext from '@/context/ToasterContext';
 import Favicon from '/public/favicon.ico';
 import '@/styles/globals.css';
 import Footer from '@/components/ui/Footer';
+import { AuthContext } from '@/context/AuthContext';
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -23,15 +24,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='en'>
       <body suppressHydrationWarning={true} className={roboto.className}>
-        {/* <AuthContext> */}
-        <ThemeRegistry>
-          <ToasterContext />
-          <ReduxProvider>
-            {children}
-            <Footer />
-          </ReduxProvider>
-        </ThemeRegistry>
-        {/* </AuthContext> */}
+        <AuthContext>
+          <ThemeRegistry>
+            <ToasterContext />
+            <ReduxProvider>
+              {children}
+              <Footer />
+            </ReduxProvider>
+          </ThemeRegistry>
+        </AuthContext>
       </body>
     </html>
   );

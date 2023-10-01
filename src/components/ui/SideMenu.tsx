@@ -32,12 +32,14 @@ import {
 import { usePathname, useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { toggleSideMenu } from '@/redux/slices/sideMenuSlice';
+import { signOut, useSession } from 'next-auth/react';
 
 export const SideMenu = () => {
   const router = useRouter();
   const pathname = usePathname();
   // const { isMenuOpen, toggleSideMenu } = useContext( UiContext );
-  // const { user, isLoggedIn, logout } = useContext(  AuthContext );
+  const { data: session } = useSession();
+
   const isOpenSideMenu = useAppSelector((state) => state.sideMenu.isOpenSideMenu);
   const dispatch = useAppDispatch();
   const [searchTerm, setSearchTerm] = useState('');
@@ -79,8 +81,7 @@ export const SideMenu = () => {
             />
           </ListItem>
 
-          {
-            // isLoggedIn && (
+          {session && (
             <>
               <ListItem button>
                 <ListItemIcon>
@@ -96,8 +97,7 @@ export const SideMenu = () => {
                 <ListItemText primary={'My Orders'} />
               </ListItem>
             </>
-            // )
-          }
+          )}
 
           <ListItem
             button
@@ -132,24 +132,21 @@ export const SideMenu = () => {
             <ListItemText primary={'Children'} />
           </ListItem>
 
-          {/* {isLoggedIn ? ( */}
-          <ListItem
-            button
-            // onClick={logout}
-          >
-            <ListItemIcon>
-              <LoginOutlined />
-            </ListItemIcon>
-            <ListItemText primary={'Sign out'} />
-          </ListItem>
-          {/* ) : ( */}
-          <ListItem button onClick={() => navigateTo(`/auth/login?p=${pathname}`)}>
-            <ListItemIcon>
-              <VpnKeyOutlined />
-            </ListItemIcon>
-            <ListItemText primary={'Sign in'} />
-          </ListItem>
-          {/* )} */}
+          {session ? (
+            <ListItem button onClick={() => signOut()}>
+              <ListItemIcon>
+                <LoginOutlined />
+              </ListItemIcon>
+              <ListItemText primary={'Sign out'} />
+            </ListItem>
+          ) : (
+            <ListItem button onClick={() => navigateTo(`/auth/login?p=${pathname}`)}>
+              <ListItemIcon>
+                <VpnKeyOutlined />
+              </ListItemIcon>
+              <ListItemText primary={'Sign in'} />
+            </ListItem>
+          )}
 
           {/* Admin */}
           {/* {user?.role === 'admin' && ( */}
