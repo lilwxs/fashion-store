@@ -1,9 +1,7 @@
 'use client';
 
+// https://github.com/vercel/next.js/discussions/15687
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
-
-// I am creating a dummy store since its impossible to create local storage in the server side.
-// By checking existence of the window object i can choose when to create the storage.
 
 const createNoopStorage = () => {
   return {

@@ -1,35 +1,42 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
-// import { userApi } from './services/userApi';
-import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
-import cart from './slices/cartSlice';
-import sideMenu from './slices/sideMenuSlice';
+import { productsApi } from './services/productsAPI';
+import { cartReducer } from './slices/cartSlice';
+import { sideMenuReducer } from './slices/sideMenuSlice';
 import storage from './customStorage';
+// import storage from 'redux-persist/lib/storage';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 
-const reducers = combineReducers({
-  cart,
-  sideMenu,
-  // [userApi.reducerPath]: userApi.reducer,
-});
-
-const persistConfig = {
-  key: 'root',
-  version: 1,
+const cartPersistConfig = {
+  key: 'cart',
   storage: storage,
+  // whitelist: ['cart'],
 };
 
-const persistedReducer = persistReducer(persistConfig, reducers);
+const rootReducer = combineReducers({
+  cart: persistReducer(cartPersistConfig, cartReducer),
+  sideMenu: sideMenuReducer,
+  [productsApi.reducerPath]: productsApi.reducer,
+});
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   devTools: process.env.NODE_ENV !== 'production',
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }).concat([thunk]),
+      serializableCheck: false,
+    }).concat([productsApi.middleware]),
 });
+
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

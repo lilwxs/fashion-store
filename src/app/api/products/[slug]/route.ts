@@ -20,7 +20,7 @@ export const GET = async (req: NextRequest, { params: { slug } }: Params) => {
       return NextResponse.json({ message: 'Product not found' }, { status: 404 });
     }
 
-    product.images = product.images.map((image: string | string[]) => {
+    product.images = product.images.map((image) => {
       return image.includes('http') ? image : `${process.env.HOST_NAME}products/${image}`;
     });
 
