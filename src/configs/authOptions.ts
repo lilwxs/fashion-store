@@ -1,8 +1,8 @@
 import type { AuthOptions } from 'next-auth';
-import GoggleProvider from 'next-auth/providers/google';
+import GoogleProvider from 'next-auth/providers/google';
 import GitHubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import bcrypt from 'bcryptjs';
+import jwt from 'bcryptjs';
 import dbUsers from '@/database/dbUsers';
 import Credentials from 'next-auth/providers/credentials';
 
@@ -10,7 +10,7 @@ export const authOptions: AuthOptions = {
   providers: [
     //https://cloud.google.com/ --> console --> APIs & services --> My Project --> Credentials --> Create OAuth client ID
     //http://localhost:3003/api/auth/callback/google
-    GoggleProvider({
+    GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_SECRET!,
     }),

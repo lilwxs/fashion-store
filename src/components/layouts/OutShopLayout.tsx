@@ -2,9 +2,11 @@
 import { useAppDispatch } from '@/redux/hooks';
 import { AppBar, Toolbar, Link as MuiLink, Typography, Box, Button } from '@mui/material';
 import Link from 'next/link';
+import Logo from '/public/logo.svg';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { toggleSideMenu } from '@/redux/slices/sideMenuSlice';
 import { SideMenu } from '@/components/ui/SideMenu';
+import Image from 'next/image';
 
 const OutShopLayout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
@@ -12,8 +14,7 @@ const OutShopLayout = ({ children }: { children: React.ReactNode }) => {
     <AppBar>
       <Toolbar>
         <MuiLink component={Link} href='/' display='flex' alignItems='center'>
-          <Typography variant='h6'>Next App |</Typography>
-          <Typography sx={{ ml: 0.5, mt: 0.5 }}>Shop</Typography>
+          <Image src={Logo} alt='logo' width={50} height={50} />
         </MuiLink>
 
         <Box flex={1} />

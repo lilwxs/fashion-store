@@ -1,7 +1,7 @@
 'use client';
-import { useContext, useState } from 'react';
-import NextLink from 'next/link';
+import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import Logo from '/public/logo.svg';
 
 import {
   AppBar,
@@ -22,6 +22,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { toggleSideMenu } from '@/redux/slices/sideMenuSlice';
 import { ThemeToggle } from './ThemeToggle';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const Navbar = () => {
   const router = useRouter();
@@ -41,19 +42,13 @@ export const Navbar = () => {
   return (
     <AppBar>
       <Toolbar>
-        <>
-          <MuiLink component={Link} href='/' display='flex' alignItems='center'>
-            <Typography variant='h6'>Next App |</Typography>
-            <Typography sx={{ ml: 0.5, mt: 0.5 }}>Shop</Typography>
-          </MuiLink>
-        </>
-
-        <Box flex={1} />
-
         <Box
           sx={{ display: isSearchVisible ? 'none' : { xs: 'none', sm: 'block' } }}
           className='fadeIn'
         >
+          <MuiLink component={Link} href='/'>
+            <Button color={pathname === '/' ? 'primary' : 'info'}>Tất cả</Button>
+          </MuiLink>
           <MuiLink component={Link} href='/category/men'>
             <Button color={pathname === '/category/men' ? 'primary' : 'info'}>Men</Button>
           </MuiLink>
@@ -64,6 +59,12 @@ export const Navbar = () => {
             <Button color={pathname === '/category/kid' ? 'primary' : 'info'}>Children</Button>
           </MuiLink>
         </Box>
+
+        <Box flex={1} />
+
+        <MuiLink component={Link} href='/' display='flex' alignItems='center'>
+          <Image src={Logo} alt='logo' />
+        </MuiLink>
 
         <Box flex={1} />
 

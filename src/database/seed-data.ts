@@ -33,21 +33,15 @@ interface SeedData {
 export const initialData: SeedData = {
   users: [
     {
-      name: 'Fernando Herrera',
-      email: 'fernando@google.com',
-      password: bcrypt.hashSync('123456'),
+      name: 'hoangthaininh',
+      email: 'hoangthaininh@lilwsx.com',
+      password: bcrypt.hashSync('abc.12345'),
       role: 'admin',
     },
     {
-      name: 'Vitalii Melnik',
-      email: 'mvitalim@ukr.net',
-      password: bcrypt.hashSync('123456'),
-      role: 'admin',
-    },
-    {
-      name: 'Eduardo Rios',
-      email: 'eduardo@google.com',
-      password: bcrypt.hashSync('123456'),
+      name: 'tester',
+      email: 'tester@google.com',
+      password: bcrypt.hashSync('abc.12345'),
       role: 'client',
     },
   ],
@@ -58,7 +52,7 @@ export const initialData: SeedData = {
       images: ['1740176-00-A_0_2000.jpg', '1740176-00-A_1.jpg'],
       inStock: 7,
       price: 75,
-      sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+      sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'], 
       slug: 'mens_chill_crew_neck_sweatshirt',
       type: 'shirts',
       tags: ['sweatshirt'],

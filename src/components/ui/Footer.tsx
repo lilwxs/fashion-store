@@ -5,8 +5,7 @@ const Footer = () => {
   return (
     <Box component='footer' sx={{ margin: '50px 0 0' }}>
       <Typography variant='subtitle2' align='center' color='text.secondary' component='p'>
-        Powered by Nesxt.js 13, Material UI 5, SWR, MongoDB, Mongoose, NextAuth.js, React Hook Form
-        and Yup
+        Cửa hang của chúng tôi chuyên cung cấp các loại thời trang thời thượng nhất thị trường hiện nay.
         <br />
       </Typography>
       <Typography variant='body2' sx={{ display: 'block' }} color='text.secondary' align='center'>
@@ -15,10 +14,10 @@ const Footer = () => {
           component={Link}
           underline='always'
           // color='inherit'
-          href='https://github.com/MelnikVitali/next13-shop-app'
+          href='hoangthaininh'
           target='_blank'
         >
-          Vitalii Melnik
+          Hoang Thai Ninh
         </MuiLink>{' '}
         {new Date().getFullYear()}
         {'.'}

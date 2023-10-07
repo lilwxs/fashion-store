@@ -28,6 +28,8 @@ const ProductCard: FC<Props> = ({ product }) => {
   return (
     <Grid
       item
+      lg={2}
+      md={3}
       xs={6}
       sm={4}
       onMouseEnter={() => setIsHovered(true)}
@@ -57,7 +59,7 @@ const ProductCard: FC<Props> = ({ product }) => {
 
       <Box sx={{ mt: 1, display: isImageLoaded ? 'block' : 'none' }} className='fadeIn'>
         <Typography fontWeight={700}>{product.title}</Typography>
-        <Typography fontWeight={500}>{`$${product.price}`}</Typography>
+        <Typography fontWeight={500}>{`${product.price} Tỷ`}</Typography>
       </Box>
     </Grid>
   );
